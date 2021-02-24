@@ -1,5 +1,14 @@
 # cypress-intercept-formdata
 
+<p align="center">
+    <a href="LICENSE.md">
+       <img src="https://img.shields.io/github/license/yoavniran/cypress-intercept-formdata?color=blue&style=plastic" alt="MIT License"/>
+    </a>
+    <a href="https://badge.fury.io/js/cypress-intercept-formdata">
+        <img src="https://badge.fury.io/js/cypress-intercept-formdata.svg" alt="npm version" height="20">
+    </a>
+</p>
+
 This package is intended to be used with Cypress.io intercept command.
 
 As of version 6.3+ the request.body accessed from the intercept is an ArrayBuffer for multipart/form-data requests.
