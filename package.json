@@ -9,7 +9,7 @@
     "lint": "eslint ./src --cache",
     "lint:nocache": "eslint ./src",
     "build": "yarn clean; rollup -c",
-    "release:prep": "yarn test; yarn build",
+    "release:prep": "yarn build; yarn test",
     "release": "np --no-cleanup --test-script=\"release:prep\"",
     "serve": "http-server -p 9991",
     "cy:open": "cypress open",
