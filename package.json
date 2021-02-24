@@ -14,7 +14,7 @@
     "serve": "http-server -p 9991",
     "cy:open": "cypress open",
     "cy:run": "wait-on http://localhost:9991 -d 1000 && cypress run",
-    "e2e": "concurrently --success first --kill-others \"yarn serve\" \"yarn cy:run\"",
+    "e2e": "concurrently --success last --kill-others \"yarn serve\" \"yarn cy:run\"",
     "test": "yarn lint && yarn types && yarn e2e"
   },
   "repository": {

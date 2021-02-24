@@ -4,7 +4,8 @@ const getFormDataFromRequest = (body, boundary) => {
 	const parts = decoded.split(boundary);
 
 	return parts.reduce((res, p) => {
-		const fileNameMatch = p.match(/name="([\w[]]+)"; filename="([\w.]+)"/m);
+		// eslint-disable-next-line no-useless-escape
+		const fileNameMatch = p.match(/name="([\w\[\]]+)"; filename="([\w.]+)"/m);
 
 		if (fileNameMatch) {
 			res[fileNameMatch[1]] = fileNameMatch[2];
