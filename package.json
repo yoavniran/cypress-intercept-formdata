@@ -1,6 +1,6 @@
 {
   "name": "cypress-intercept-formdata",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "cypress command to work with intreception's multipart/form-data requests",
   "main": "lib/index.js",
   "scripts": {
