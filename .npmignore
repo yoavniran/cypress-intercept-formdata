@@ -22,4 +22,5 @@ scripts/
 tsconfig.json
 .eslintcache
 cypress/
+rollup.config.js
 
