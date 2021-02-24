@@ -23,4 +23,6 @@ tsconfig.json
 .eslintcache
 cypress/
 rollup.config.js
+babel.config.js
+cypress.json
 

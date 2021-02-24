@@ -10,7 +10,9 @@ const getFormDataFromRequest = (body, boundary) => {
 		if (fileNameMatch) {
 			res[fileNameMatch[1]] = fileNameMatch[2];
 		} else {
-			const fieldName = p.match(/; name="([\w-]+)"/)?.[1];
+			const fieldMatch = p.match(/; name="([\w-]+)"/);
+			const fieldName = fieldMatch && fieldMatch[1];
+
 			if (fieldName) {
 				res[fieldName] = p.split(`\r\n`)[3];
 			}
@@ -23,7 +25,8 @@ const getFormDataFromRequest = (body, boundary) => {
 const interceptFormData = (request) => {
 	const { body, headers } = request;
 	const contentType = headers["content-type"];
-	const boundary = contentType.match(/boundary=([\w-]+)/)?.[1];
+	const boundaryMatch = contentType.match(/boundary=([\w-]+)/);
+	const boundary = boundaryMatch && boundaryMatch[1];
 
 	return getFormDataFromRequest(body, boundary);
 };
