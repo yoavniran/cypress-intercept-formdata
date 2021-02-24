@@ -1,0 +1,60 @@
+{
+  "name": "cypress-intercept-formdata",
+  "version": "0.1.0",
+  "description": "cypress command to work with intreception's multipart/form-data requests",
+  "main": "lib/index.js",
+  "scripts": {
+    "clean": "rimraf lib",
+    "types": "tsc --outDir ./tstest",
+    "lint": "eslint ./src --cache",
+    "lint:nocache": "eslint ./src",
+    "build": "yarn clean; rollup -c",
+    "release:prep": "yarn test; yarn build",
+    "release": "np --no-cleanup --test-script=\"release:prep\"",
+    "serve": "http-server -p 9991",
+    "cy:open": "cypress open",
+    "cy:run": "wait-on http://localhost:9991 -d 1000 && cypress run",
+    "e2e": "concurrently --success first --kill-others \"yarn serve\" \"yarn cy:run\"",
+    "test": "yarn lint && yarn types && yarn e2e"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yoavniran/cypress-intercept-formdata.git"
+  },
+  "keywords": [
+    "cypress",
+    "cypress.io",
+    "form-data",
+    "request",
+    "e2e",
+    "ci"
+  ],
+  "author": "yoav niran",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yoavniran/cypress-intercept-formdata/issues"
+  },
+  "homepage": "https://github.com/yoavniran/cypress-intercept-formdata#readme",
+  "peerDependencies": {
+    "cypress": ">=6.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.1",
+    "@babel/preset-env": "^7.13.5",
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
+    "babel-eslint": "^10.1.0",
+    "concurrently": "^6.0.0",
+    "cypress": "^6.5.0",
+    "cypress-file-upload": "^5.0.2",
+    "eslint": "^7.20.0",
+    "eslint-plugin-import": "^2.22.1",
+    "http-server": "^0.12.3",
+    "rollup": "^2.39.1",
+    "typescript": "^4.2.2",
+    "wait-on": "^5.2.1"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  }
+}

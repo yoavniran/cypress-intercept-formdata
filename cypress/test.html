@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test cypress-intercept-formdata</title>
+</head>
+<body>
+
+<form id="form" action="http://test-server/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" id="file" name="file"/>
+    <input type="text" id="first" name="first"/>
+    <input type="text" id="last" name="last">
+</form>
+
+<button id="submitForm">Send Form Data</button>
+
+<script>
+
+    document.getElementById("submitForm")
+    .addEventListener("click", () => {
+      document.getElementById("form").submit();
+    });
+
+</script>
+</body>
+</html>

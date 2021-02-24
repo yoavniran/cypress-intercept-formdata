@@ -1,0 +1,9 @@
+{
+  "port": 8089,
+  "testFiles": "**/*-spec.js",
+  "chromeWebSecurity": false,
+  "video": false,
+  "env": {
+  },
+  "pluginsFile": false
+}
