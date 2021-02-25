@@ -1,4 +1,4 @@
-# cypress-intercept-formdata
+# cypress-intercept-formdata (CIFD)
 
 <p align="center">
     <a href="LICENSE.md">
@@ -9,9 +9,9 @@
     </a>
 </p>
 
-This package is intended to be used with Cypress.io intercept command.
+This package is intended to be used with [Cypress.io](https://www.cypress.io/) [intercept](https://docs.cypress.io/api/commands/intercept.html) command.
 
-As of version 6.3+ the request.body accessed from the intercept is an ArrayBuffer for multipart/form-data requests.
+As of version 6.2 or 6.3 the request.body accessed from the intercept is an ArrayBuffer for multipart/form-data requests.
 
 This makes it difficult to work with the body of the request and make assertions on it.
 
@@ -77,4 +77,23 @@ cy.wait("@uploadRequest")
 		expect(formData["file[0]"]).to.eq("fileName1.txt");
 		expect(formData["file[1]"]).to.eq("fileName2.txt");
 	});
+```
+
+### Use inside intercept callback
+
+Cypress intercept command accepts a [routeHandler](https://docs.cypress.io/api/commands/intercept.html#Intercepting-a-request)
+
+If you want to inspect/assert on the body from the handler, you can import the interceptFormData directly and call it like this:
+
+```javascript
+import { interceptFormData } from "cypress-intercept-formdata";
+
+//...
+
+cy.intercept("POST", "http://localhost:8888/api/test",, (req) => {
+  const formData = interceptFormData(req);
+  
+  expect(formData["first_name"]).to.eq("James");
+});
+
 ```
