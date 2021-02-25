@@ -79,7 +79,7 @@ cy.wait("@uploadRequest")
 	});
 ```
 
-### Use inside intercept callback
+### Use inside intercept routeHandler
 
 Cypress intercept command accepts a [routeHandler](https://docs.cypress.io/api/commands/intercept.html#Intercepting-a-request)
 
