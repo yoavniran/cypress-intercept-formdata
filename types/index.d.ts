@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
-import { CyHttpMessages, Interception } from "cypress/types/net-stubbing";
+import { CyHttpMessages } from "cypress/types/net-stubbing";
 
 declare global {
   namespace Cypress {
-    interface Chainable<Subject = Interception> {
+    interface Chainable<Subject = any> {
       interceptFormData(cb: (formData: Record<string, any>) => void): Chainable<Subject>;
     }
   }
