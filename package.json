@@ -17,6 +17,7 @@
     "e2e": "yarn build; concurrently --success last --kill-others \"yarn serve\" \"yarn cy:run\"",
     "test": "yarn lint && yarn types && yarn e2e"
   },
+  "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yoavniran/cypress-intercept-formdata.git"
