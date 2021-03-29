@@ -47,7 +47,7 @@ Then in your spec:
 cy.intercept("POST", "http://localhost:8888/api/test", {
 	statusCode: 200,
 	body: { success: true },
-}).as(alias);
+}).as("uploadRequest");
 
 //...
 
