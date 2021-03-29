@@ -90,7 +90,7 @@ import { interceptFormData } from "cypress-intercept-formdata";
 
 //...
 
-cy.intercept("POST", "http://localhost:8888/api/test",, (req) => {
+cy.intercept("POST", "http://localhost:8888/api/test", (req) => {
   const formData = interceptFormData(req);
   
   expect(formData["first_name"]).to.eq("James");
