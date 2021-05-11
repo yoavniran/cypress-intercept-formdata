@@ -13,6 +13,7 @@
 </form>
 
 <button id="submitForm">Send Form Data</button>
+<button id="submitFormJs">Send Form Data With JS</button>
 
 <script>
 
@@ -20,6 +21,24 @@
     .addEventListener("click", () => {
       document.getElementById("form").submit();
     });
+
+    document.getElementById("submitFormJs")
+	    .addEventListener("click", () => {
+		    const fd = new FormData();
+		    const fileInput = document.getElementById("file");
+
+		    fd.append(fileInput.name, fileInput.files[0], fileInput.files[0].name);
+		    fd.append("first", document.getElementById("first").value);
+		    fd.append("last", document.getElementById("last").value);
+
+            const request = new XMLHttpRequest();
+            request.open("PUT", "http://test-server/upload");
+            request.send(fd);
+		    // fetch("http://test-server/upload", {
+		    // 	method: "PUT",
+            //     body: fd,
+            // });
+	    });
 
 </script>
 </body>

@@ -1,6 +1,18 @@
+const getBodyAsString = (body) => {
+	let str;
+
+	if (typeof body === "string") {
+		str = body;
+	} else {
+		const decoder = new TextDecoder();
+		str = decoder.decode(body);
+	}
+
+	return str;
+};
+
 const getFormDataFromRequest = (body, boundary) => {
-	const decoder = new TextDecoder();
-	const decoded = decoder.decode(body);
+	const decoded = getBodyAsString(body);
 	const parts = decoded.split(boundary);
 
 	return parts.reduce((res, p) => {
