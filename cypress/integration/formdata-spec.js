@@ -1,11 +1,11 @@
-describe("cifd test - form submit", () => {
+describe("cifd test - javascript submit", () => {
 
 	beforeEach(() => {
 		cy.visit("cypress/test.html");
 	});
 
-	it("should be able to intercept formdata from submitted form", () => {
-		cy.intercept("POST", "http://test-server/upload", {
+	it("should be able to intercept formdata sent with XHR", () => {
+		cy.intercept("PUT", "http://test-server/upload", {
 			statusCode: 200,
 			body: {success: true}
 		}).as("submitForm");
@@ -22,7 +22,7 @@ describe("cifd test - form submit", () => {
 		cy.get("#file")
 			.selectFile("@uploadFile");
 
-		cy.get("#submitForm")
+		cy.get("#submitFormJs")
 			.click();
 
 		cy.wait("@submitForm")
