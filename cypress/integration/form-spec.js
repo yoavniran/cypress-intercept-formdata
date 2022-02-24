@@ -1,7 +1,7 @@
 describe("cifd test - form submit", () => {
 
 	it("should be able to intercept formdata from submitted form", () => {
-		cy.visit("http://localhost:9991/cypress/test.html");
+		cy.visit("cypress/test.html");
 
 		cy.intercept("POST", "http://test-server/upload", {
 			statusCode: 200,

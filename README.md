@@ -97,3 +97,23 @@ cy.intercept("POST", "http://localhost:8888/api/test", (req) => {
 });
 
 ```
+
+## Testing this Library
+
+In terminal 1:
+
+```bash
+yarn serve
+```
+
+In terminal 2:
+
+```bash
+yarn cy:run
+```
+
+OR
+
+```bash
+yarn cy:open
+```

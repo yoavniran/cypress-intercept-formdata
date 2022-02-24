@@ -9,7 +9,9 @@
 <form id="form" action="http://test-server/upload" method="POST" enctype="multipart/form-data">
     <input type="file" id="file" name="file"/>
     <input type="text" id="first" name="first"/>
-    <input type="text" id="last" name="last">
+    <input type="text" id="last" name="last"/>
+    <textarea id="free-text" name="free">
+    </textarea>
 </form>
 
 <button id="submitForm">Send Form Data</button>
@@ -30,6 +32,7 @@
 		    fd.append(fileInput.name, fileInput.files[0], fileInput.files[0].name);
 		    fd.append("first", document.getElementById("first").value);
 		    fd.append("last", document.getElementById("last").value);
+		    fd.append("free", document.getElementById("free-text").value);
 
             const request = new XMLHttpRequest();
             request.open("PUT", "http://test-server/upload");

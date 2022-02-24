@@ -26,7 +26,7 @@ const getFormDataFromRequest = (body, boundary) => {
 			const fieldName = fieldMatch && fieldMatch[1];
 
 			if (fieldName) {
-				res[fieldName] = p.split(`\r\n`)[3];
+				res[fieldName] = p.split(`\r\n`).slice(3,-1).join("");
 			}
 		}
 
