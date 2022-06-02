@@ -1,3 +1,6 @@
+import defaultParsers from "./parsers";
+import { resultAppender } from "./appenders";
+
 const getBodyAsString = (body) => {
 	let str;
 
@@ -11,23 +14,27 @@ const getBodyAsString = (body) => {
 	return str;
 };
 
+const parse = (part, parsers) => {
+	let parsed = null,
+		index = 0;
+
+	while (!parsed && index < parsers.length) {
+		parsed = parsers[index](part);
+		index += 1;
+	}
+
+	return parsed || [];
+};
+
 const getFormDataFromRequest = (body, boundary) => {
 	const decoded = getBodyAsString(body);
 	const parts = decoded.split(boundary);
 
 	return parts.reduce((res, p) => {
-		// eslint-disable-next-line no-useless-escape
-		const fileNameMatch = p.match(/name="([\w\[\]]+)"; filename="([\w.]+)"/m);
+		const [name, value, path] = parse(p, defaultParsers);
 
-		if (fileNameMatch) {
-			res[fileNameMatch[1]] = fileNameMatch[2];
-		} else {
-			const fieldMatch = p.match(/; name="([\w-]+)"/);
-			const fieldName = fieldMatch && fieldMatch[1];
-
-			if (fieldName) {
-				res[fieldName] = p.split(`\r\n`).slice(3,-1).join("");
-			}
+		if (name) {
+			res = resultAppender(res, name, value, path);
 		}
 
 		return res;

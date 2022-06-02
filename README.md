@@ -117,3 +117,11 @@ OR
 ```bash
 yarn cy:open
 ```
+
+**For testing while developing - **
+
+In terminal 3:
+
+```bash
+yarn watch
+```
