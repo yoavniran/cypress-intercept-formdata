@@ -13,4 +13,22 @@ module.exports = {
 	plugins: [
 		"@babel/plugin-proposal-export-default-from",
 	],
+	env: {
+		test: {
+			plugins: [
+				"@babel/plugin-transform-runtime",
+				"istanbul"
+			],
+			presets: [
+				[
+					"@babel/env",
+					{
+						targets: {
+							node: true,
+						},
+					},
+				],
+			],
+		},
+	}
 };

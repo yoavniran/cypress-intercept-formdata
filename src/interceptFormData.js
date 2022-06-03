@@ -1,18 +1,7 @@
+import getBodyAsString from "./getBodyAsString";
+import getBoundary from "./getBoundary";
 import defaultParsers from "./parsers";
 import { resultAppender } from "./appenders";
-
-const getBodyAsString = (body) => {
-	let str;
-
-	if (typeof body === "string") {
-		str = body;
-	} else {
-		const decoder = new TextDecoder();
-		str = decoder.decode(body);
-	}
-
-	return str;
-};
 
 const parse = (part, parsers) => {
 	let parsed = null,
@@ -43,9 +32,7 @@ const getFormDataFromRequest = (body, boundary) => {
 
 const interceptFormData = (request) => {
 	const { body, headers } = request;
-	const contentType = headers["content-type"];
-	const boundaryMatch = contentType.match(/boundary=([\w-]+)/);
-	const boundary = boundaryMatch && boundaryMatch[1];
+	const boundary = getBoundary(headers);
 
 	return getFormDataFromRequest(body, boundary);
 };

@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import fileFieldParser from "./fileFieldParser";
 import genericFieldParser from "./genericFieldParser";
 

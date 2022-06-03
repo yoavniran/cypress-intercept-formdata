@@ -33,3 +33,5 @@ cypress/screenshots/
 cypress/examples
 
 tstest/
+
+.nyc_output/

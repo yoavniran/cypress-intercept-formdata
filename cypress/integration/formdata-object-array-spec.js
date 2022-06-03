@@ -33,7 +33,6 @@ describe("cifd test - formdata xhr with array of objects", () => {
 
 		cy.wait("@submitForm")
 			.interceptFormData((formData) => {
-				console.log("!!!!!!!!! ", formData);
 				expect(formData["file"]).to.eq("flower.jpg");
 
 				expect(formData["extra"][0].id).to.eq("30")
