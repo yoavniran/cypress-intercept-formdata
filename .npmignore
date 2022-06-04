@@ -33,3 +33,5 @@ reports/
 .nycrc
 
 test-setup.js
+codecov
+codecov.yml
