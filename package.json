@@ -5,19 +5,32 @@
   "main": "lib/index.js",
   "scripts": {
     "clean": "rimraf lib",
+    "coverage": "./codecov",
     "types": "tsc --outDir ./tstest",
     "lint": "eslint ./src --cache",
     "lint:nocache": "eslint ./src",
     "build": "yarn clean; rollup -c",
+    "watch": "yarn build -w",
+    "start": "yarn watch",
     "release:prep": "yarn build",
     "release": "np --no-cleanup --test-script=\"release:prep\"",
     "serve": "http-server -p 9991",
     "cy:open": "CYPRESS_BASE_URL=http://localhost:9991 cypress open",
     "cy:run": "wait-on http://localhost:9991 -d 1000 && CYPRESS_BASE_URL=http://localhost:9991 cypress run",
+    "cy:run:ci": "yarn cy:run --record false --reporter mocha-multi-reporters --reporter-options configFile=\"cypress/reporters-config.json\"",
     "e2e": "yarn build; concurrently --success last --kill-others \"yarn serve\" \"yarn cy:run\"",
-    "test": "yarn lint && yarn types && yarn e2e"
+    "mocha": "NODE_ENV=test mocha",
+    "mocha:cov": "NODE_ENV=test nyc --reporter=html --reporter=text --reporter=lcov mocha",
+    "test": "yarn lint && yarn types && yarn mocha:cov && yarn e2e",
+    "ci-lint": "yarn lint:nocache",
+    "ci-mocha": "NODE_ENV=test yarn mocha:cov --reporter mocha-multi-reporters --reporter-options configFile=\".reporters-config.json\"",
+    "ci-types": "yarn types",
+    "test:ci": "concurrently -s all --kill-others-on-fail \"yarn:ci-* \""
   },
   "types": "./types/index.d.ts",
+  "engines": {
+    "node": ">=10"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yoavniran/cypress-intercept-formdata.git"
@@ -41,19 +54,35 @@
   },
   "devDependencies": {
     "@babel/core": "^7.13.1",
+    "@babel/plugin-proposal-export-default-from": "^7.17.12",
+    "@babel/plugin-transform-runtime": "^7.18.2",
     "@babel/preset-env": "^7.13.5",
+    "@babel/register": "^7.17.7",
+    "@istanbuljs/nyc-config-babel": "^3.0.0",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-node-resolve": "^13.3.0",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
     "babel-eslint": "^10.1.0",
-    "concurrently": "^6.0.0",
+    "babel-plugin-istanbul": "^6.1.1",
+    "chai": "^4.3.6",
+    "concurrently": "^7.2.1",
     "cypress": "^9.5.0",
     "eslint": "^7.20.0",
     "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-mocha": "^10.0.5",
     "http-server": "^0.12.3",
+    "mocha": "^10.0.0",
+    "mocha-junit-reporter": "^2.0.2",
+    "mocha-multi-reporters": "^1.5.1",
     "np": "^7.4.0",
+    "nyc": "^15.1.0",
+    "object-to-formdata": "^4.4.2",
     "rollup": "^2.39.1",
+    "sinon": "^14.0.0",
     "typescript": "^4.2.2",
-    "wait-on": "^5.2.1"
+    "wait-on": "^5.2.1",
+    "xml2js": "^0.4.23"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"

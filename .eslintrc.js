@@ -9,11 +9,15 @@ module.exports = {
   },
   "extends": [
     "eslint:recommended",
+	  "plugin:mocha/recommended"
   ],
+	"plugins": ["mocha"],
   "globals": {
     "ENV": true,
 	  "Cypress": false,
 	  "cy": false,
+	  "sinon": true,
+	  "stubProp": true
   },
   "settings": {
     "import/core-modules": [
@@ -75,6 +79,7 @@ module.exports = {
     "import/prefer-default-export": 0,
     "import/no-webpack-loader-syntax": 0,
     "max-len": [2, 155],
+	  "mocha/no-mocha-arrows": 0,
   },
 
   "overrides": [

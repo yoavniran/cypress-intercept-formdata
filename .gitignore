@@ -33,3 +33,9 @@ cypress/screenshots/
 cypress/examples
 
 tstest/
+
+.nyc_output/
+
+reports/
+
+codecov

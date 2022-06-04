@@ -1,0 +1,157 @@
+version: 2.1
+orbs:
+  codecov: codecov/codecov@3.1.1
+
+references:
+    docker_image: &docker_image
+        - image: cypress/base:14.17.3
+          environment:
+              TERM: xterm
+
+commands:
+    setup:
+        description: "Setup command to install/bootstrap/build"
+        steps:
+            - run: yarn --frozen-lockfile
+            - run: yarn cache dir
+            - run: yarn build
+
+    prepare-e2e:
+        description: "Prepare for cypress e2e tests"
+        steps:
+            - run:
+                  name: Install cypress
+                  command: yarn cypress install
+            - run:
+                  name: Verify cypress
+                  command: npx cypress verify
+
+    run-e2e-http:
+        description: "Run http servers for e2e tests"
+        steps:
+          - run:
+                name: Serve HTML test page
+                command: yarn serve
+                background: true
+
+    run-e2e:
+       description: "Run cypress e2e tests"
+       steps:
+           - run:
+                 name: Run cypress e2e
+                 command: yarn cy:run:ci
+#                  --spec $(tr [:blank:] ',' < /tmp/specs-to-run)
+
+jobs:
+    setup:
+        docker: *docker_image
+        steps:
+            - checkout
+            - restore_cache:
+                  keys:
+                      - yarn-deps-v2-{{ checksum "yarn.lock" }}
+            - setup
+            - save_cache:
+                  key: yarn-deps-v2-{{ checksum "yarn.lock" }}
+                  paths:
+                      - node_modules
+                      - ~/.cache/yarn
+                      - /usr/local/share/.cache/yarn/
+            -   persist_to_workspace:
+                    root: .
+                    paths:
+                        - node_modules
+                        - packages
+                        - lib
+
+    test:
+        docker: *docker_image
+        steps:
+            - checkout
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: Test Code (lint, mocha, types)
+                  command: yarn test:ci
+#                  environment:
+#                      JEST_JUNIT_OUTPUT_DIR: "reports/junit/js-test-results.xml"
+            - store_test_results:
+                  path: reports/junit
+            - store_artifacts:
+                  path: reports/junit
+            - store_artifacts:
+                  path: coverage
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - coverage
+
+    coverage:
+        docker: *docker_image
+        steps:
+            - checkout
+            - attach_workspace:
+                  at: .
+            - codecov/upload
+            - store_artifacts:
+                  path: coverage
+
+    cypress-prepare:
+        docker: *docker_image
+        steps:
+            - checkout
+            - attach_workspace:
+                  at: .
+            - prepare-e2e
+            - save_cache:
+                    key: cy-install-{{ checksum "yarn.lock" }}
+                    paths:
+                        - /root/.cache/Cypress
+
+    cypress-run:
+        docker: *docker_image
+#        parallelism: 5
+        steps:
+            - checkout
+            - attach_workspace:
+                  at: .
+#            - run:
+#                name: Split tests by timing
+#                command: |
+#                    circleci tests glob "cypress/integration/**/*-spec.js" | circleci tests split --split-by=timings > /tmp/specs-to-run
+            - run-e2e-http
+            - restore_cache:
+                keys:
+                    - cy-install-{{ checksum "yarn.lock" }}
+            - run-e2e
+            -  run:
+                when: always
+                name: Fix junit reporter XML files attributes
+                command: |
+                    node cypress/fix-junit-report.js
+            - store_artifacts:
+                  path: cypress/screenshots
+            - store_artifacts:
+                  path: cypress/videos
+            - store_test_results:
+                  path: cypress/results
+
+workflows:
+    check-cifd:
+        jobs:
+            - setup
+            - test:
+                  requires:
+                      - setup
+            - coverage:
+                  requires:
+                      - test
+                  filters:
+                      branches:
+                          only: master
+            - cypress-prepare:
+                  requires:
+                      - setup
+            - cypress-run:
+                  requires:
+                      - cypress-prepare

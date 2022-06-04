@@ -1,14 +1,18 @@
-const getBodyAsString = (body) => {
-	let str;
+import getBodyAsString from "./getBodyAsString";
+import getBoundary from "./getBoundary";
+import defaultParsers from "./parsers";
+import { resultAppender } from "./appenders";
 
-	if (typeof body === "string") {
-		str = body;
-	} else {
-		const decoder = new TextDecoder();
-		str = decoder.decode(body);
+const parse = (part, parsers) => {
+	let parsed = null,
+		index = 0;
+
+	while (!parsed && index < parsers.length) {
+		parsed = parsers[index](part);
+		index += 1;
 	}
 
-	return str;
+	return parsed || [];
 };
 
 const getFormDataFromRequest = (body, boundary) => {
@@ -16,18 +20,10 @@ const getFormDataFromRequest = (body, boundary) => {
 	const parts = decoded.split(boundary);
 
 	return parts.reduce((res, p) => {
-		// eslint-disable-next-line no-useless-escape
-		const fileNameMatch = p.match(/name="([\w\[\]]+)"; filename="([\w.]+)"/m);
+		const [name, value, path] = parse(p, defaultParsers);
 
-		if (fileNameMatch) {
-			res[fileNameMatch[1]] = fileNameMatch[2];
-		} else {
-			const fieldMatch = p.match(/; name="([\w-]+)"/);
-			const fieldName = fieldMatch && fieldMatch[1];
-
-			if (fieldName) {
-				res[fieldName] = p.split(`\r\n`).slice(3,-1).join("");
-			}
+		if (name) {
+			res = resultAppender(res, name, value, path);
 		}
 
 		return res;
@@ -36,9 +32,7 @@ const getFormDataFromRequest = (body, boundary) => {
 
 const interceptFormData = (request) => {
 	const { body, headers } = request;
-	const contentType = headers["content-type"];
-	const boundaryMatch = contentType.match(/boundary=([\w-]+)/);
-	const boundary = boundaryMatch && boundaryMatch[1];
+	const boundary = getBoundary(headers);
 
 	return getFormDataFromRequest(body, boundary);
 };

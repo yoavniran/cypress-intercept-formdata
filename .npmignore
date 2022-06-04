@@ -26,3 +26,12 @@ rollup.config.js
 babel.config.js
 cypress.json
 
+.nyc_output/
+coverage/
+reports/
+.reporters-config.json
+.nycrc
+
+test-setup.js
+codecov
+codecov.yml

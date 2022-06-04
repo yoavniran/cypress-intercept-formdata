@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import interceptFormData from "./interceptFormData";
 
 Cypress.Commands

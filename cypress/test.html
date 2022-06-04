@@ -20,29 +20,39 @@
 <script>
 
     document.getElementById("submitForm")
-    .addEventListener("click", () => {
-      document.getElementById("form").submit();
-    });
+        .addEventListener("click", () => {
+          document.getElementById("form").submit();
+        });
 
     document.getElementById("submitFormJs")
 	    .addEventListener("click", () => {
-		    const fd = new FormData();
-		    const fileInput = document.getElementById("file");
+            let fd;
+            const fileInput = document.getElementById("file");
 
-		    fd.append(fileInput.name, fileInput.files[0], fileInput.files[0].name);
-		    fd.append("first", document.getElementById("first").value);
-		    fd.append("last", document.getElementById("last").value);
-		    fd.append("free", document.getElementById("free-text").value);
+            if (window._testExtraData) {
+                const data = window._testExtraData;
+                console.log("ADDING TEST EXTRA DATA: ", data);
+
+                fd = window._fdSerialize({ extra: data }, { indices: true, nullsAsUndefineds: true });
+            } else {
+                fd = new FormData();
+            }
+
+            fd.append(fileInput.name, fileInput.files[0], fileInput.files[0].name);
+            fd.append("first", document.getElementById("first").value);
+            fd.append("last", document.getElementById("last").value);
+            fd.append("free", document.getElementById("free-text").value);
+
+                console.log("sending Form Data = ", fd);
 
             const request = new XMLHttpRequest();
             request.open("PUT", "http://test-server/upload");
             request.send(fd);
-		    // fetch("http://test-server/upload", {
-		    // 	method: "PUT",
+            // fetch("http://test-server/upload", {
+            // 	method: "PUT",
             //     body: fd,
             // });
 	    });
-
 </script>
 </body>
 </html>
