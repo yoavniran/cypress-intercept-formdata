@@ -124,7 +124,7 @@ OR
 yarn cy:open
 ```
 
-**For testing while developing - **
+### Testing while developing
 
 In terminal 3:
 
