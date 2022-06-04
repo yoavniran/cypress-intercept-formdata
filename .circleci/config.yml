@@ -78,6 +78,7 @@ jobs:
                     paths:
                         - node_modules
                         - packages
+                        - lib
 
     test:
         docker: *docker_image
@@ -171,7 +172,7 @@ jobs:
                 when: always
                 name: Fix junit reporter XML files attributes
                 command: |
-                    node scripts/fix-junit-report.js
+                    node cypress/fix-junit-report.js
             - store_artifacts:
                   path: cypress/screenshots
             - store_artifacts:
