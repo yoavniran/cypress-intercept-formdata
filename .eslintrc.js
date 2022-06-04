@@ -16,6 +16,8 @@ module.exports = {
     "ENV": true,
 	  "Cypress": false,
 	  "cy": false,
+	  "sinon": true,
+	  "stubProp": true
   },
   "settings": {
     "import/core-modules": [

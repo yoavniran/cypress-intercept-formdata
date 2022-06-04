@@ -9,7 +9,7 @@ describe("getBodyAsString tests", () => {
 	it("should decode array buffer", () => {
 		const str = "cidf test buffer";
 		const encoder = new TextEncoder();
-		const buffer = encoder.encode(str)
+		const buffer = encoder.encode(str);
 
 		const result = getBodyAsString(buffer);
 		expect(result).to.eql(str);

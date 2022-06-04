@@ -7,6 +7,12 @@
     <a href="https://badge.fury.io/js/cypress-intercept-formdata">
         <img src="https://badge.fury.io/js/cypress-intercept-formdata.svg" alt="npm version" height="20">
     </a>
+    <a href="https://circleci.com/gh/yoavniran/cypress-intercept-formdata">
+        <img src="https://circleci.com/gh/yoavniran/cypress-intercept-formdata.svg?style=svg" alt="circleci status"/>
+    </a>  
+    <a href="https://www.npmjs.com/package/cypress-intercept-formdata">
+        <img src="https://img.shields.io/npm/dm/cypress-intercept-formdata.svg?style=plastic&color=blue&label=monthly%20downloads"/> 
+    </a>
 </p>
 
 This package is intended to be used with [Cypress.io](https://www.cypress.io/) [intercept](https://docs.cypress.io/api/commands/intercept.html) command.

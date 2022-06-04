@@ -16,7 +16,7 @@ describe("genericFieldParser tests", () => {
 
 		expect(name).to.eql("first");
 		expect(value).to.eql("james");
-		expect(path).to.be
+		expect(path).to.be;
 	});
 
 	it("should parse field with path", () => {
