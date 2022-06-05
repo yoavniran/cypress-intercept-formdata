@@ -10,6 +10,9 @@
     <a href="https://circleci.com/gh/yoavniran/cypress-intercept-formdata">
         <img src="https://circleci.com/gh/yoavniran/cypress-intercept-formdata.svg?style=svg" alt="circleci status"/>
     </a>  
+    <a href="https://codecov.io/gh/yoavniran/cypress-intercept-formdata">
+      <img src="https://codecov.io/gh/yoavniran/cypress-intercept-formdata/branch/master/graph/badge.svg" alt="codecov status"/>
+    </a>
     <a href="https://www.npmjs.com/package/cypress-intercept-formdata">
         <img src="https://img.shields.io/npm/dm/cypress-intercept-formdata.svg?style=plastic&color=blue&label=monthly%20downloads"/> 
     </a>
