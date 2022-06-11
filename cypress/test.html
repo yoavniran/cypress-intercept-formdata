@@ -10,6 +10,8 @@
     <input type="file" id="file" name="file"/>
     <input type="text" id="first" name="first"/>
     <input type="text" id="last" name="last"/>
+    <input type="text" id="full-name" name="full-name"/>
+    <input type="text" id="phone_number" name="phone_number"/>
     <textarea id="free-text" name="free">
     </textarea>
 </form>
@@ -41,6 +43,8 @@
             fd.append(fileInput.name, fileInput.files[0], fileInput.files[0].name);
             fd.append("first", document.getElementById("first").value);
             fd.append("last", document.getElementById("last").value);
+            fd.append("full-name", document.getElementById("full-name").value);
+            fd.append("phone_number", document.getElementById("phone_number").value);
             fd.append("free", document.getElementById("free-text").value);
 
                 console.log("sending Form Data = ", fd);

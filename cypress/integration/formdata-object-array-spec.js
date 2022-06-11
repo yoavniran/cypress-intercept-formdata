@@ -21,8 +21,8 @@ describe("cifd test - formdata xhr with array of objects", () => {
 		cy.window()
 			.then((w) => {
 				w._testExtraData = [
-					{ id: 30, name: "steph" },
-					{ id: 0, name: "jt" },
+					{ id: 30, name: "steph", "full-name": "stephen curry" },
+					{ id: 0, name: "jt", "full-name": "jayson tatum" },
 				];
 
 				w._fdSerialize = serialize;
@@ -37,9 +37,11 @@ describe("cifd test - formdata xhr with array of objects", () => {
 
 				expect(formData["extra"][0].id).to.eq("30")
 				expect(formData["extra"][0].name).to.eq("steph");
+				expect(formData["extra"][0]["full-name"]).to.eq("stephen curry");
 
 				expect(formData["extra"][1].id).to.eq("0")
 				expect(formData["extra"][1].name).to.eq("jt");
+				expect(formData["extra"][1]["full-name"]).to.eq("jayson tatum");
 
 				expect(formData["first"]).to.eq("james");
 			});

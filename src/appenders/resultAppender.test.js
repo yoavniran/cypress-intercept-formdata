@@ -32,6 +32,42 @@ describe("resultAppender tests", () => {
 		]);
 	});
 
+	it("should append array of objects with kebab-case prop names", () => {
+		const result = resultAppender(
+			resultAppender(
+				resultAppender(
+					resultAppender({}, "test", "steph", "[0][first-name]"),
+				"test", "30", "[0][id]"),
+				"test", "0", "[1][id]"),
+			"test", "jayson", "[1][first-name]",
+		);
+
+		console.log("RESULT ==== ", result);
+
+		expect(result["test"]).to.eql([
+			{ id: "30", "first-name": "steph" },
+			{ id: "0", "first-name": "jayson" },
+		]);
+	});
+
+	it("should append array of objects with snake_case prop names", () => {
+		const result = resultAppender(
+			resultAppender(
+				resultAppender(
+					resultAppender({}, "test", "steph", "[0][first_name]"),
+					"test", "30", "[0][id]"),
+				"test", "0", "[1][id]"),
+			"test", "jayson", "[1][first_name]",
+		);
+
+		console.log("RESULT ==== ", result);
+
+		expect(result["test"]).to.eql([
+			{ id: "30", "first_name": "steph" },
+			{ id: "0", "first_name": "jayson" },
+		]);
+	});
+
 	it("should append array of objects with nested arrays", () => {
 		const result = resultAppender(
 			resultAppender(

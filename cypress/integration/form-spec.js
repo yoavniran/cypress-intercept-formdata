@@ -19,6 +19,12 @@ describe("cifd test - form submit", () => {
 		cy.get("#last")
 			.type("bond");
 
+		cy.get("#full-name")
+			.type("james bond");
+
+		cy.get("#phone_number")
+			.type("007");
+
 		cy.get("#file")
 			.selectFile("@uploadFile");
 
@@ -29,6 +35,8 @@ describe("cifd test - form submit", () => {
 			.interceptFormData((formData) => {
 				expect(formData["first"]).to.eq("james");
 				expect(formData["last"]).to.eq("bond");
+				expect(formData["full-name"]).to.eq("james bond");
+				expect(formData["phone_number"]).to.eq("007");
 				expect(formData["file"]).to.eq("flower.jpg");
 			});
 	});

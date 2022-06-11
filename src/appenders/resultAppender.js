@@ -5,7 +5,7 @@ const resultAppender = (result, name, value, path) => {
 		let parent = result;
 
 		[`[${name}]`]
-			.concat(path.match(/\[\w+]/g))
+			.concat(path.match(/\[[\w-_]+]/g))
 			.forEach((pathPart, index, allPaths) => {
 				const cleanName = pathPart.replace(/[\][]/g, "");
 				//look ahead to determine the type of the "child"
@@ -21,8 +21,6 @@ const resultAppender = (result, name, value, path) => {
 				} else {
 					parent = parent[cleanName];
 				}
-
-				// console.log("WORKING ON PATH ", { path, pathPart, cleanName, cleanChild, isChildArray, allPaths, parent, result});
 			});
 	}
 
