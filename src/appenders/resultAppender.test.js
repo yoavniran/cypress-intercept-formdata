@@ -42,8 +42,6 @@ describe("resultAppender tests", () => {
 			"test", "jayson", "[1][first-name]",
 		);
 
-		console.log("RESULT ==== ", result);
-
 		expect(result["test"]).to.eql([
 			{ id: "30", "first-name": "steph" },
 			{ id: "0", "first-name": "jayson" },
@@ -59,8 +57,6 @@ describe("resultAppender tests", () => {
 				"test", "0", "[1][id]"),
 			"test", "jayson", "[1][first_name]",
 		);
-
-		console.log("RESULT ==== ", result);
 
 		expect(result["test"]).to.eql([
 			{ id: "30", "first_name": "steph" },

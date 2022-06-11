@@ -34,13 +34,13 @@ describe("genericFieldParser tests", () => {
 	});
 
 	it("should parse field with kebab-case", () => {
-		const [name, value] = genericFieldParser(`\r\nContent-Disposition: form-data; name="kebab-case"\r\n\r\nyummi\r\n--`)
+		const [name, value] = genericFieldParser(`\r\nContent-Disposition: form-data; name="kebab-case"\r\n\r\nyummi\r\n--`);
 		expect(name).to.eql("kebab-case");
 		expect(value).to.eql("yummi");
 	});
 
 	it("should parse field with snake_case", () => {
-		const [name, value] = genericFieldParser(`\r\nContent-Disposition: form-data; name="snake_case"\r\n\r\nsssss\r\n--`)
+		const [name, value] = genericFieldParser(`\r\nContent-Disposition: form-data; name="snake_case"\r\n\r\nsssss\r\n--`);
 		expect(name).to.eql("snake_case");
 		expect(value).to.eql("sssss");
 	});

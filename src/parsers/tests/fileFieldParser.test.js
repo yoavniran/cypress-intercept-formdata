@@ -27,12 +27,14 @@ describe("fileFieldParser tests", () => {
 	});
 
 	it("should parse file field for file name with kebab-case", () => {
-		const result = fileFieldParser(`\r\nContent-Disposition: form-data; name="kebab-case"; filename="pretty-flower.jpg"\r\nContent-Type: image/jpeg\r`);
+		const result =
+			fileFieldParser(`\r\nContent-Disposition: form-data; name="kebab-case"; filename="pretty-flower.jpg"\r\nContent-Type: image/jpeg\r`);
 		expect(result).to.eql(["kebab-case", "pretty-flower.jpg"]);
 	});
 
 	it("should parse file field for file name with snake_case", () => {
-		const result = fileFieldParser(`\r\nContent-Disposition: form-data; name="snake_case"; filename="pretty_flower.jpg"\r\nContent-Type: image/jpeg\r`);
+		const result =
+			fileFieldParser(`\r\nContent-Disposition: form-data; name="snake_case"; filename="pretty_flower.jpg"\r\nContent-Type: image/jpeg\r`);
 		expect(result).to.eql(["snake_case", "pretty_flower.jpg"]);
 	});
 });
