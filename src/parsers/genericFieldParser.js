@@ -1,7 +1,7 @@
 //doesnt support dotsForObjectNotation (object-to-formdata)
 const genericFieldParser = (part) => {
 	let name, value;
-	const fieldMatch = part.match(/; name="([\w-_]+)((\[[\w-_]+])*)/);
+	const fieldMatch = part.match(/; name="([\w-_.]+)((\[[\w-_]+])*)/);
 
 	if (fieldMatch) {
 		name = fieldMatch[1];

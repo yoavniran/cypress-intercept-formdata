@@ -58,4 +58,16 @@ describe("genericFieldParser tests", () => {
 		expect(value).to.eql("30");
 		expect(path).to.eql("[0][snake_case][1][name]");
 	});
+
+	it("should parse field with . in name", () => {
+		const [name, value] = genericFieldParser(`\r\nContent-Disposition: form-data; name="TICKET.email"\r\n\r\ntest\r\n--`);
+		expect(name).to.eql("TICKET.email");
+		expect(value).to.eql("test");
+	});
+
+	it("should parse field with email value", () => {
+		const [name, value] = genericFieldParser(`\r\nContent-Disposition: form-data; name="TICKET.email"\r\n\r\ntest@gmail.com\r\n--`);
+		expect(name).to.eql("TICKET.email");
+		expect(value).to.eql("test@gmail.com");
+	});
 });
