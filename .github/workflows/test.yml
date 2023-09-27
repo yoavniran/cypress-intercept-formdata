@@ -28,11 +28,11 @@ jobs:
       - name: lint, types, unit-tests
         run: pnpm test:ci
 
-      - name: Unit Test Report
+      - name: Unit-test Report
         uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
-          name: Mocha Tests
+          name: Unit-test Report
           path: reports/mocha.json
           reporter: mocha-json
   e2e:
@@ -47,18 +47,11 @@ jobs:
       - run: pnpm build
 
       - run: pnpm e2e:ci
-#      - uses: cypress-io/github-action@v6
-#        with:
 
-#  build:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v4
-#
-#      - uses: ./.github/actions/setup
-#
-#      - name: build
-#        run: pnpm build
-
-
-
+      - name: E2E Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: E2E Report
+          path: cypress/results/results-*.xml
+          reporter: java-junit
