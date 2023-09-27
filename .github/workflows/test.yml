@@ -1,0 +1,26 @@
+name: CIFD Test
+
+on:
+  workflow_dispatch
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.17"
+          cache: "pnpm"
+          cache-dependency-path: "./pnpm-lock.yaml"
+
+      - name: test
+        run: pnpm test:ci
+
+      - name: build
+        run: pnpm build
