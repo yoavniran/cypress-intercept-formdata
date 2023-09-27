@@ -18,34 +18,43 @@ env:
   CI: true
 
 jobs:
-  test:
+  test-cifd:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
+      - uses: ./.github/actions/setup
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "16.17"
-          cache: "pnpm"
-          cache-dependency-path: "./pnpm-lock.yaml"
-
-      - run: pnpm install
-      #--frozen-lockfile
-
-      - name: test
+      - name: lint, types, unit-tests
         run: pnpm test:ci
 
-      - name: build
-        run: pnpm build
-
-      - name: Test Report
+      - name: Unit Test Report
         uses: dorny/test-reporter@v1
         if: success() || failure()
         with:
           name: Mocha Tests
           path: reports/mocha.json
           reporter: mocha-json
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup
+
+      - run: pnpm cy:run:ci
+#      - uses: cypress-io/github-action@v6
+#        with:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/setup
+
+      - name: build
+        run: pnpm build
+
+
+
