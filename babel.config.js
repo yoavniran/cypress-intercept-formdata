@@ -15,10 +15,6 @@ export default {
 	],
 	env: {
 		test: {
-			plugins: [
-				"@babel/plugin-transform-runtime",
-				"istanbul"
-			],
 			presets: [
 				[
 					"@babel/env",
@@ -28,6 +24,11 @@ export default {
 						},
 					},
 				],
+			],
+			plugins: [
+				"@babel/plugin-proposal-export-default-from",
+				"@babel/plugin-transform-runtime",
+				"istanbul"
 			],
 		},
 	}
