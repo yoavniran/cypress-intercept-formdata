@@ -44,6 +44,8 @@ jobs:
 
       - run: pnpm cypress install
 
+      - run: pnpm build
+
       - run: pnpm e2e:ci
 #      - uses: cypress-io/github-action@v6
 #        with:
