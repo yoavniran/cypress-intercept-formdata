@@ -42,19 +42,19 @@ jobs:
 
       - uses: ./.github/actions/setup
 
-      - run: pnpm cy:run:ci
+      - run: pnpm e2e:ci
 #      - uses: cypress-io/github-action@v6
 #        with:
 
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: ./.github/actions/setup
-
-      - name: build
-        run: pnpm build
+#  build:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v4
+#
+#      - uses: ./.github/actions/setup
+#
+#      - name: build
+#        run: pnpm build
 
 
 
