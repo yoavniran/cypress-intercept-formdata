@@ -1,6 +1,6 @@
 const env = process.env.BABEL_ENV;
 
-module.exports = {
+export default {
 	presets: [
 		[
 			"@babel/env",

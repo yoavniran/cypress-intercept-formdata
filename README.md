@@ -4,7 +4,7 @@
     <a href="LICENSE.md">
        <img src="https://img.shields.io/github/license/yoavniran/cypress-intercept-formdata?color=blue&style=plastic" alt="MIT License"/>
     </a>
-    <a href="https://badge.fury.io/js/cypress-intercept-formdata">
+    <a href="https://www.npmjs.com/package/cypress-intercept-formdata">
         <img src="https://badge.fury.io/js/cypress-intercept-formdata.svg" alt="npm version" height="20">
     </a>
     <a href="https://circleci.com/gh/yoavniran/cypress-intercept-formdata">
@@ -13,9 +13,8 @@
     <a href="https://codecov.io/gh/yoavniran/cypress-intercept-formdata">
       <img src="https://codecov.io/gh/yoavniran/cypress-intercept-formdata/branch/master/graph/badge.svg" alt="codecov status"/>
     </a>
-    <a href="https://www.npmjs.com/package/cypress-intercept-formdata">
-        <img src="https://img.shields.io/npm/dm/cypress-intercept-formdata.svg?style=plastic&color=blue&label=monthly%20downloads"/> 
-    </a>
+    <img src="https://img.shields.io/npm/dm/cypress-intercept-formdata.svg?style=plastic&color=blue&label=monthly%20downloads"/>
+    <img src="https://shields.io/npm/dt/cypress-intercept-formdata.svg?style=plastic&color=green&label=total+downloads"/>
 </p>
 
 This package is intended to be used with [Cypress.io](https://www.cypress.io/) [intercept](https://docs.cypress.io/api/commands/intercept.html) command.
@@ -29,8 +28,8 @@ CIFD makes it easy to use the multipart body in your specs.
 ## Installation
 
 ```shell
-#Yarn: 
-   $ yarn add cypress-intercept-formdata
+#pnpm: 
+   $ pnpm add cypress-intercept-formdata
 
 #NPM:
    $ npm i cypress-intercept-formdata
@@ -112,19 +111,19 @@ cy.intercept("POST", "http://localhost:8888/api/test", (req) => {
 In terminal 1:
 
 ```bash
-yarn serve
+pnpm serve
 ```
 
 In terminal 2:
 
 ```bash
-yarn cy:run
+pnpm cy:run
 ```
 
 OR
 
 ```bash
-yarn cy:open
+pnpm cy:open
 ```
 
 ### Testing while developing
@@ -132,5 +131,5 @@ yarn cy:open
 In terminal 3:
 
 ```bash
-yarn watch
+pnpm watch
 ```
