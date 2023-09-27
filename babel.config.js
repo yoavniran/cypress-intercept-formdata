@@ -1,12 +1,14 @@
-const env = process.env.BABEL_ENV;
+// const env = process.env.BABEL_ENV;
 
-export default {
+module.exports = {
 	presets: [
 		[
 			"@babel/env",
 			{
 				"modules": false,
-				"targets": "node 10.0",
+				targets: {
+					node: true,
+				},
 			},
 		],
 	],
