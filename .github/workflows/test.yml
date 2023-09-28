@@ -35,6 +35,15 @@ jobs:
           name: Unit-test Report
           path: reports/mocha.json
           reporter: mocha-json
+
+      - uses: codecov/codecov-action@v3
+        if: ${{ github.ref_name == 'master' }}
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+          fail_ci_if_error: true
+          verbose: true
+
   e2e:
     runs-on: ubuntu-latest
     steps:
@@ -55,17 +64,3 @@ jobs:
           name: E2E Report
           path: cypress/results/results-*.xml
           reporter: java-junit
-
-  coverage:
-    needs:
-      - test
-    if: ${{ github.ref_name == 'master' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/lcov.info
-          fail_ci_if_error: true
-          verbose: true
