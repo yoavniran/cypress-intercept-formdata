@@ -7,8 +7,8 @@
     <a href="https://www.npmjs.com/package/cypress-intercept-formdata">
         <img src="https://badge.fury.io/js/cypress-intercept-formdata.svg" alt="npm version" height="20">
     </a>
-    <a href="https://circleci.com/gh/yoavniran/cypress-intercept-formdata">
-        <img src="https://circleci.com/gh/yoavniran/cypress-intercept-formdata.svg?style=svg" alt="circleci status"/>
+    <a href="https://github.com/yoavniran/cypress-intercept-formdata/actions/workflows/test.yml">
+        <img src="https://github.com/yoavniran/cypress-intercept-formdata/actions/workflows/test.yml/badge.svg"/> 
     </a>  
     <a href="https://codecov.io/gh/yoavniran/cypress-intercept-formdata">
       <img src="https://codecov.io/gh/yoavniran/cypress-intercept-formdata/branch/master/graph/badge.svg" alt="codecov status"/>

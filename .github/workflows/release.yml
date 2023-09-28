@@ -1,0 +1,43 @@
+name: Create NPM Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      releaseType:
+        description: 'Version Type'
+        required: true
+        default: 'patch'
+        options:
+          - patch
+          - minor
+          - major
+      dry:
+        type: boolean
+        description: 'Is Dry Run?'
+        required: false
+        default: false
+
+env:
+  NPM_TOKEN: ${{ secrets.CIFD_NPM_TOKEN }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Define GIT author
+        run: |
+          git config user.email "ci@cifd"
+          git config user.name "CIFD CI"
+
+      - uses: ./.github/actions/setup
+
+#      - name: Install Dependencies
+#        run: npm ci
+#      - name: Release
+#        run: npm run release:ci -- ${{github.event.inputs.releaseType}} --npm.tag=${{github.event.inputs.distTag}}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
