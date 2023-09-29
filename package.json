@@ -1,7 +1,7 @@
 {
   "name": "cypress-intercept-formdata",
   "version": "0.5.2",
-  "description": "cypress command to work with intreception's multipart/form-data requests",
+  "description": "cypress command to work with Intercept multipart/form-data requests",
   "main": "lib/index.js",
   "scripts": {
     "clean": "rimraf lib",
