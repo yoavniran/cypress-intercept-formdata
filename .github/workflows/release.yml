@@ -17,8 +17,12 @@ on:
         required: false
         default: false
 
-env:
-  NPM_TOKEN: ${{ secrets.CIFD_NPM_TOKEN }}
+permissions:
+  contents: write
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
   release:
@@ -32,12 +36,19 @@ jobs:
           git config user.email "ci@cifd"
           git config user.name "CIFD CI"
 
+      - name: Set NPM Auth
+        env:
+          NPM_TOKEN: ${{ secrets.CIFD_NPM_TOKEN }}
+        run: |
+          npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+
       - uses: ./.github/actions/setup
 
-#      - name: Install Dependencies
-#        run: npm ci
-#      - name: Release
-#        run: npm run release:ci -- ${{github.event.inputs.releaseType}} --npm.tag=${{github.event.inputs.distTag}}
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: pnpm build
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          release-it ${{ inputs.releaseType }} ${{ inputs.dry && ' --dry-run' || '' }}
+          
