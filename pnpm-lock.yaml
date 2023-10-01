@@ -49,9 +49,6 @@ devDependencies:
   eslint-plugin-import:
     specifier: ^2.28.1
     version: 2.28.1(@typescript-eslint/parser@6.7.3)(eslint@8.50.0)
-  eslint-plugin-mocha:
-    specifier: ^10.2.0
-    version: 10.2.0(eslint@8.50.0)
   eslint-plugin-vitest:
     specifier: ^0.3.1
     version: 0.3.1(@typescript-eslint/eslint-plugin@6.7.3)(eslint@8.50.0)(vitest@0.34.6)
@@ -4204,17 +4201,6 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-mocha@10.2.0(eslint@8.50.0):
-    resolution: {integrity: sha512-ZhdxzSZnd1P9LqDPF0DBcFLpRIGdh1zkF2JHnQklKQOvrQtT73kdP5K9V2mzvbLR+cCAO9OI48NXK/Ax9/ciCQ==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      eslint: '>=7.0.0'
-    dependencies:
-      eslint: 8.50.0
-      eslint-utils: 3.0.0(eslint@8.50.0)
-      rambda: 7.5.0
-    dev: true
-
   /eslint-plugin-vitest@0.3.1(@typescript-eslint/eslint-plugin@6.7.3)(eslint@8.50.0)(vitest@0.34.6):
     resolution: {integrity: sha512-GeR3zISHmqUGWK2sfW+eyCZivMqiQYzPf9UttHXBiEyMveS/jkKLHCrHUllwr3Hz1+i0zoseANd2xL0cFha8Eg==}
     engines: {node: 14.x || >= 16}
@@ -4249,16 +4235,6 @@ packages:
     dependencies:
       esrecurse: 4.3.0
       estraverse: 5.3.0
-    dev: true
-
-  /eslint-utils@3.0.0(eslint@8.50.0):
-    resolution: {integrity: sha512-uuQC43IGctw68pJA1RgbQS8/NP7rch6Cwd4j3ZBtgo4/8Flj4eGE7ZYSZRN3iq5pVUv6GPdW5Z1RFleo84uLDA==}
-    engines: {node: ^10.0.0 || ^12.0.0 || >= 14.0.0}
-    peerDependencies:
-      eslint: '>=5'
-    dependencies:
-      eslint: 8.50.0
-      eslint-visitor-keys: 2.1.0
     dev: true
 
   /eslint-visitor-keys@2.1.0:
@@ -7598,10 +7574,6 @@ packages:
   /quick-lru@5.1.1:
     resolution: {integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==}
     engines: {node: '>=10'}
-    dev: true
-
-  /rambda@7.5.0:
-    resolution: {integrity: sha512-y/M9weqWAH4iopRd7EHDEQQvpFPHj1AA3oHozE9tfITHUtTR7Z9PSlIRRG2l1GuW7sefC1cXFfIcF+cgnShdBA==}
     dev: true
 
   /randombytes@2.1.0:
