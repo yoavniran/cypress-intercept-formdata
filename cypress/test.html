@@ -40,7 +40,11 @@
                 fd = new FormData();
             }
 
-            fd.append(fileInput.name, fileInput.files[0], fileInput.files[0].name);
+            Array.prototype.forEach.call(fileInput.files, (f) => {
+	            console.log("found file = ", f);
+	            fd.append(fileInput.name, f, f.name);
+            });
+
             fd.append("first", document.getElementById("first").value);
             fd.append("last", document.getElementById("last").value);
             fd.append("full-name", document.getElementById("full-name").value);

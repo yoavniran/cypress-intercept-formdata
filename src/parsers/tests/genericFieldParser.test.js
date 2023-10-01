@@ -3,12 +3,12 @@ import genericFieldParser from "../genericFieldParser";
 describe("genericFieldParser tests", () => {
 	it("should ignore empty field", () => {
 		const result = genericFieldParser("");
-		expect(result).to.eq(null);
+		expect(result).to.eql(null);
 	});
 
 	it("should ignore invalid field", () => {
 		const result = genericFieldParser("--");
-		expect(result).to.eq(null);
+		expect(result).to.eql(null);
 	});
 
 	it("should parse simple field", () => {
@@ -16,7 +16,7 @@ describe("genericFieldParser tests", () => {
 
 		expect(name).to.eql("first");
 		expect(value).to.eql("james");
-		expect(path).to.be;
+		expect(path).toBe("");
 	});
 
 	it("should parse field with path", () => {

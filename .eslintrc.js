@@ -9,17 +9,10 @@ module.exports = {
 	},
 	"extends": [
 		"eslint:recommended",
-		"plugin:mocha/recommended",
 	],
-	"plugins": [
-		"mocha",
-	],
+	"plugins": [],
 	"globals": {
 		"ENV": true,
-		"Cypress": false,
-		"cy": false,
-		"sinon": true,
-		"stubProp": true,
 	},
 	"settings": {
 		"import/core-modules": [
@@ -87,9 +80,32 @@ module.exports = {
 			2,
 			155,
 		],
-		"mocha/no-mocha-arrows": 0,
 	},
 	"overrides": [
+		{
+			"files": ["*.test.js"],
+			"globals": {
+				"vi": false,
+			},
+			"extends": [
+				"plugin:vitest/recommended",
+			],
+			"plugins": [
+				"vitest",
+			],
+			"rules": {
+				//TODO: bring back when fixed: https://github.com/veritem/eslint-plugin-vitest/issues/237
+				"vitest/valid-expect": 1,
+				"vitest/assertion-type": 0,
+			},
+		},
+		{
+			"files": ["*.spec.js", "src/index.js"],
+			"globals": {
+				"Cypress": false,
+				"cy": false,
+			},
+		},
 		{
 			"files": [
 				"*.ts",

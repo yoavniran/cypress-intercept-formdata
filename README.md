@@ -66,6 +66,8 @@ cy.wait("@uploadRequest")
 
 ```
 
+### Uploading Files
+
 If you have file(s) uploaded as part of the request they will be available in the formData object as well:
 The value is the file name
 
@@ -82,10 +84,27 @@ Multiple files are also supported:
 ```javascript
 cy.wait("@uploadRequest")
 	.interceptFormData((formData) => {
-		expect(formData["file[0]"]).to.eq("fileName1.txt");
-		expect(formData["file[1]"]).to.eq("fileName2.txt");
+		expect(formData["file"][0]).to.eq("fileName1.txt");
+		expect(formData["file"][1]).to.eq("fileName2.txt");
 	});
 ```
+
+#### File Content
+
+By default, CIFD simply adds the file name being uploaded to the formData object. If you'd like to
+assert more deeply on the file(s) being uploaded, you can set _options.loadFileContent_ to true:
+
+
+```javascript
+  cy.wait("@submitForm")
+    .interceptFormData((formData) => {
+        expect(formData["file"]).to.be.instanceof(File);
+        expect(formData["file"]).to.have.property("type", "image/jpeg");
+        expect(formData["file"].size).to.be.eq(2551829);
+    }, { loadFileContent: true });
+```
+> Multiple files are supported as well.
+
 
 ### Use inside intercept routeHandler
 

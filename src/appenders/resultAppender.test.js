@@ -100,4 +100,9 @@ describe("resultAppender tests", () => {
 		const result2 = resultAppender({}, "test", "bar", "[0][0]");
 		expect(result2["test"][0][0]).to.equal("bar");
 	});
+
+	it("should create array for same named value", () => {
+		const result = resultAppender({ "file": "aaa" }, "file", "bbb");
+		expect(result.file).toStrictEqual(["aaa", "bbb"]);
+	});
 });

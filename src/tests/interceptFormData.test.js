@@ -1,19 +1,35 @@
 import interceptFormData from "../interceptFormData";
-import * as getBodyAsString from "../getBodyAsString";
-import * as getBoundary from "../getBoundary";
-import * as resultAppender from "../appenders/resultAppender";
-
+import getBodyAsString from "../getBodyAsString";
+import getBoundary from "../getBoundary";
+import { resultAppender } from "../appenders";
 import defaultParsers from "../parsers";
 
+vi.mock("../parsers", async () => {
+	// const ps = await vi.importActual("../parsers")
+	return { default: [vi.fn(), vi.fn(), vi.fn()] }; //
+});
+
+// vi.mock("../parsers");
+vi.mock("../getBoundary");
+vi.mock("../getBodyAsString");
+vi.mock("../appenders");
+
 describe("interceptFormData tests", () => {
-	let resultAppenderStub;
+	// let resultAppenderStub;
+
+	// before(()=>{
+	// 	sinon.stub(defaultParsers);
+	// });
+
+	// beforeEach(() => {
+	// stubProp(getBoundary).returns("|");
+	// stubProp(getBodyAsString).returns("b|o|d|y");
+	// resultAppenderStub = stubProp(resultAppender);
+	// });
 
 	beforeEach(() => {
-		stubProp(getBoundary).returns("|");
-		stubProp(getBodyAsString).returns("b|o|d|y");
-		resultAppenderStub = stubProp(resultAppender);
-
-		sinon.stub(defaultParsers);
+		getBoundary.mockReturnValue("|");
+		getBodyAsString.mockReturnValue("b|o|d|y");
 	});
 
 	it("should parse form-data from request", () => {
@@ -22,10 +38,10 @@ describe("interceptFormData tests", () => {
 			headers: { "content-type": "multi" },
 		};
 
-		defaultParsers[0].onFirstCall().returns(["first", "james"]);
-		defaultParsers[1].onFirstCall().returns(["second", "bob"]);
+		defaultParsers[0].mockReturnValueOnce(["first", "james"]);
+		defaultParsers[1].mockReturnValueOnce(["second", "bob"]);
 
-		resultAppenderStub.callsFake((res, name, value) => {
+		resultAppender.mockImplementation((res, name, value) => {
 			if (typeof res !== "string") {
 				res = "";
 			}
@@ -37,9 +53,8 @@ describe("interceptFormData tests", () => {
 
 		const result = interceptFormData(request);
 
-		expect(defaultParsers[0].callCount).to.eq(4);
-		expect(defaultParsers[1].callCount).to.eq(3);
-
-		expect(result).to.eq("first|james|second|bob|");
+		expect(result).to.eql("first|james|second|bob|");
+		expect(defaultParsers[0]).toHaveBeenCalledTimes(4);
+		expect(defaultParsers[1]).toHaveBeenCalledTimes(3);
 	});
 });
