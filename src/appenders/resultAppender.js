@@ -1,7 +1,7 @@
 const resultAppender = (result, name, value, path) => {
 	if (!path) {
 			result[name] = result[name] ?
-				[].concat(result[name], value) : value
+				[].concat(result[name], value) : value;
 	} else {
 		let parent = result;
 

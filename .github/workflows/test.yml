@@ -2,6 +2,8 @@ name: CIFD Test
 
 on:
   push:
+    branches:
+      - 'master'
   workflow_dispatch:
   pull_request:
 
@@ -33,7 +35,7 @@ jobs:
         if: success() || failure()
         with:
           name: Unit-test Report
-          path: reports/mocha.json
+          path: reports/vitest.json
           reporter: mocha-json
 
       - uses: codecov/codecov-action@v3

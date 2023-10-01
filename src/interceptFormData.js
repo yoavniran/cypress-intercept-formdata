@@ -32,7 +32,7 @@ const getFormDataFromRequest = (body, boundary, options) => {
 };
 
 const interceptFormData = (request, options = {}) => {
-	const usedOptions = {...DEFAULTS, ...options};
+	const usedOptions = { ...DEFAULTS, ...options };
 	const { body, headers } = request;
 	const boundary = getBoundary(headers);
 
