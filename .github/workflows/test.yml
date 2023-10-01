@@ -42,7 +42,7 @@ jobs:
         if: ${{ github.ref_name == 'master' }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/lcov.info
+          files: ./coverage/coverage-final.json
           fail_ci_if_error: true
           verbose: true
 
