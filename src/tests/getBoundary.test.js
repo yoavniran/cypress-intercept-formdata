@@ -8,6 +8,6 @@ describe("getBoundary tests", () => {
 
 	it("should boundary for valid input", () => {
 		const boundary = getBoundary({ "content-type": "multipart/form-data; boundary=----WebKitFormBoundaryAcje1kGXOi5cXZeu" });
-		expect(boundary).to.eq("----WebKitFormBoundaryAcje1kGXOi5cXZeu");
+		expect(boundary).to.eql("----WebKitFormBoundaryAcje1kGXOi5cXZeu");
 	});
 });

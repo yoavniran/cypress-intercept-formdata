@@ -53,7 +53,7 @@ describe("interceptFormData tests", () => {
 
 		const result = interceptFormData(request);
 
-		expect(result).to.eq("first|james|second|bob|");
+		expect(result).to.eql("first|james|second|bob|");
 		expect(defaultParsers[0]).toHaveBeenCalledTimes(4);
 		expect(defaultParsers[1]).toHaveBeenCalledTimes(3);
 	});

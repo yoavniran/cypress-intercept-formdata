@@ -1,17 +1,17 @@
 import fileFieldContentParser from "../fileFieldContentParser";
 import fileFieldParser from "../fileFieldParser";
 
-vi.mock("../fileFieldParser")
+vi.mock("../fileFieldParser");
 
 describe("fileFieldContentParser tests", () => {
 	it("should fail gracefully when not configured", () => {
-		const result = fileFieldContentParser("bla bla", { });
-		expect(result).to.eq(null);
+		const result = fileFieldContentParser("bla bla", {});
+		expect(result).to.eql(null);
 	});
 
 	it("should fail gracefully when not file", () => {
 		const result = fileFieldContentParser("bla bla", { loadFileContent: true });
-		expect(result).to.eq(null);
+		expect(result).to.eql(null);
 	});
 
 	it("should load file content", () => {
@@ -29,6 +29,6 @@ describe("fileFieldContentParser tests", () => {
 		fileFieldParser.mockReturnValueOnce(["file", "flower.jpg"]);
 
 		const result = fileFieldContentParser("bla bla \r\n\r\n--", { loadFileContent: true });
-		expect(result).to.eq(null);
+		expect(result).to.eql(null);
 	});
 });
