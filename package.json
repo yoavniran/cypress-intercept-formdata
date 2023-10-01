@@ -24,7 +24,7 @@
     "vitest:cov": "pnpm vitest --coverage",
     "test": "pnpm lint && pnpm types && pnpm vitest:cov && pnpm e2e",
     "ci-lint": "pnpm lint:nocache",
-    "ci-vitest": "pnpm vitest:cov --run --reporter=default --reporter=json --outputFile=reports/vitest.json",
+    "ci-vitest": "pnpm vitest:cov --run --reporter=default --reporter=junit --outputFile=reports/vitest.xml",
     "ci-types": "pnpm types",
     "test:ci": "concurrently -s all --kill-others-on-fail \"pnpm:ci-* \""
   },

@@ -35,7 +35,7 @@ jobs:
         if: success() || failure()
         with:
           name: Unit-test Report
-          path: reports/vitest.json
+          path: reports/vitest.xml
           reporter: mocha-json
 
       - uses: codecov/codecov-action@v3
