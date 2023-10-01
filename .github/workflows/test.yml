@@ -36,7 +36,7 @@ jobs:
         with:
           name: Unit-test Report
           path: reports/vitest.xml
-          reporter: mocha-json
+          reporter: jest-junit
 
       - uses: codecov/codecov-action@v3
         if: ${{ github.ref_name == 'master' }}
