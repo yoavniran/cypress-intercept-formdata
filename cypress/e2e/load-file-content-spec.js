@@ -38,7 +38,7 @@ describe("cifd test - file content", () => {
 			}, { loadFileContent: true });
 	});
 
-	it.only("should load the content of multiple files from the request", () => {
+	it("should load the content of multiple files from the request", () => {
 		cy.intercept("PUT", "http://test-server/upload", {
 			statusCode: 200,
 			body: { success: true },
@@ -88,10 +88,16 @@ describe("cifd test - file content", () => {
 				reader.readAsText(formData["file"][1]);
 
 				// console.log("IMG FILE", formData["file"][0]);
-				// const img = document.createElement("img");
-				// img.src = URL.createObjectURL(formData["file"][0])
-				// document.body.appendChild(img);
-				// console.log(img);
+				// const a = document.createElement("a");
+				// a.download = formData["file"][0].name;
+				// a.rel = "noopener";
+				// a.href = URL.createObjectURL(formData["file"][0])
+				// a.dispatchEvent(new MouseEvent("click"));
+
+				// 	const img = document.createElement("img");
+				// 	img.src = URL.createObjectURL(formData["file"][0])
+			// 	document.body.appendChild(img);
+			// 	console.log(img);
 			}, { loadFileContent: true });
 	});
 });
