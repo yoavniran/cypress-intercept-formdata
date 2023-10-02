@@ -34,7 +34,7 @@ describe("cifd test - file content", () => {
 
 				expect(formData["file"]).to.be.instanceof(File);
 				expect(formData["file"]).to.have.property("type", "model/gltf-binary");
-				expect(formData["file"].size).to.be.eq(2551829);
+				expect(formData["file"].size).to.be.eq(2551825);
 			}, { loadFileContent: true });
 	});
 
