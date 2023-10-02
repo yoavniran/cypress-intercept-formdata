@@ -39,3 +39,5 @@ tstest/
 reports/
 
 codecov
+
+cypress/downloads/

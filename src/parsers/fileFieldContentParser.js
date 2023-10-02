@@ -17,7 +17,7 @@ const fileFieldContentParser = (part, options) => {
 
 				const chars = Array.prototype
 					.map.call(fileContent,
-						(c, i) => fileContent.charCodeAt(i));
+						(c, i) => fileContent.charCodeAt(i)); // & 0xFF);
 
 				const file = new File(
 					[new Uint8Array(chars)],
@@ -34,4 +34,3 @@ const fileFieldContentParser = (part, options) => {
 };
 
 export default fileFieldContentParser;
-
