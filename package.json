@@ -68,7 +68,7 @@
     "@vitest/coverage-v8": "^4.0.18",
     "@vitest/eslint-plugin": "^1.6.6",
     "concurrently": "^9.2.1",
-    "cypress": "^13.2.0",
+    "cypress": "^15.9.0",
     "eslint": "^9.39.2",
     "eslint-plugin-import": "^2.32.0",
     "http-server": "^14.1.1",
